@@ -15,14 +15,16 @@ export let createRows = (symbols, parentElement) => {
 
     for (const objectOfButton of row) {
       const objectOfButtonKeys = Object.keys(objectOfButton);
-
       const keyWord = objectOfButton.keyWord
       const ukr = objectOfButton.ukr;
       const eng = objectOfButton.eng;
 
       let keyDiv = CREATEEL({
         tag: 'div',
-        classes: ['keyboard--key', 'key', `${keyWord}`]
+        classes: ['keyboard--key', 'key', `${keyWord}`],
+        attributes: {
+              'data-attribute': `${keyWord}`
+            }
       });
       let spanUkr = CREATEEL({
         tag: 'span',
@@ -47,60 +49,29 @@ export let createRows = (symbols, parentElement) => {
 
       let arrOfEngKeys = Object.keys(eng);
       let arrOfEngValues = Object.values(eng);
+  
       for (let i = 0; i < arrOfEngKeys.length; i++) {
-        let span = CREATEEL({
-          tag: 'span',
-          textContent: arrOfEngValues[i]
-        })
-        if(arrOfEngKeys[i] === 'caseDown') {
-         span.classList.add(arrOfEngKeys[i])
-        } else {
-          span.classList.add('hidden')
+        let span;
+        if (arrOfEngKeys[i] === 'caseDown') {
+          span = CREATEEL({
+            tag: 'span',
+            textContent: arrOfEngValues[i],
+            classes: arrOfEngKeys[i]
+          })
+          
+        } else if(arrOfEngKeys[i] !== 'caseDown'){
+          span = CREATEEL({
+            tag: 'span',
+            textContent: arrOfEngValues[i],
+            classes: [arrOfEngKeys[i], 'hidden']
+          })
         }
         spanEng.append(span);
       }
-      keyDiv.append(spanUkr,spanEng);
+      keyDiv.append(spanUkr, spanEng);
       rowDiv.append(keyDiv);
-      
-      // html += ` <div class="keyboard--key key ${keyWord}" data-key=${keyWord}>
-      //             <span class="ukr hidden">
-      //               <span class="hidden">${ukr.caseDown}</span>
-      //               <span class="hidden">${ukr.caseUp}</span>
-      //               <span class="hidden">${ukr.caps}</span>
-      //               <span class="hidden">${ukr.shiftCaps}</span>
-      //             </span>
-      //             <span class="eng">
-      //               <span class="">${eng.caseDown}</span>
-      //               <span class="hidden">${eng.caseUp}</span>
-      //               <span class="hidden">${eng.caps}</span>
-      //               <span class="hidden">${eng.shiftCaps}</span>
-      //             </span>
-      //           </div>`;
     }
     parentElement.append(rowDiv);
   });
-
-
-  // let html;
-  // for (const key of row) {
-  //   const ukr = key.ukr;
-  //   const eng = key.eng;
-
-  //   html += ` <div class="keyboard--key key ${key.keyWord}" data-key=${key.keyWord}>
-  //               <span class="ukr hidden">
-  //                 <span class="hidden">${ukr.caseDown}</span>
-  //                 <span class="hidden">${ukr.caseUp}</span>
-  //                 <span class="hidden">${ukr.caps}</span>
-  //                 <span class="hidden">${ukr.shiftCaps}</span>
-  //               </span>
-  //               <span class="eng">
-  //                 <span class="">${eng.caseDown}</span>
-  //                 <span class="hidden">${eng.caseUp}</span>
-  //                 <span class="hidden">${eng.caps}</span>
-  //                 <span class="hidden">${eng.shiftCaps}</span>
-  //               </span>
-  //             </div>`;
-  // }
-  // return html;
 
 }

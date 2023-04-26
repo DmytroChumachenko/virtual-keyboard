@@ -1,3 +1,2 @@
 import { RENDERPAGE } from "./src/renderPage.js";
-
-document.addEventListener("DOMContentLoaded", RENDERPAGE)
+document.addEventListener("DOMContentLoaded", RENDERPAGE);

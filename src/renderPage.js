@@ -7,6 +7,7 @@ import {
 import {
   createRows
 } from "./createRows.js";
+import { getCollectionOfKeyboardRows } from "./interactiveKeyboard.js";
 
 export const RENDERPAGE = () => {
   const BODY = document.querySelector('body');
@@ -43,5 +44,18 @@ export const RENDERPAGE = () => {
 
   let rows = createRows(SYMBOLS, BODYKEYBOARD)
   // BODYKEYBOARD.append(row);
+ 
+ let collectionOfKeyboardRows = getCollectionOfKeyboardRows();
+  console.log(collectionOfKeyboardRows[0].children);
+  document.addEventListener("keydown", (event) => {
+    const key = event.key;
 
+    // find the corresponding button element
+    const button = document.querySelector(`[data-attribute="${key}"]`);
+    if (button) {
+      // add interactivity to the button element
+      button.classList.add("active");
+    }
+  })
+  // const button = document.querySelector(`[value="${value}"]`);
 }

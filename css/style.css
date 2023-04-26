@@ -30,9 +30,7 @@
   border: 3px solid #222222;
   border-radius: 5px;
 }
-.hidden {
-  display: none;
-}
+
 .keyboard .row {
   clear: both;
     width: 100%;
@@ -61,6 +59,9 @@
   display: block;
   width: 100;
   min-height: 40px;
+}
+.hidden {
+  display: none;
 }
 .keyboard .Backspace,
 .keyboard .CapsLock,
@@ -99,4 +100,7 @@
 }
 .keyboard .Space {
   width: 330px;
+}
+.active {
+  background-color: red;
 }
