@@ -8,6 +8,7 @@ import {
   createRows
 } from "./createRows.js";
 import { getCollectionOfKeyboardRows } from "./interactiveKeyboard.js";
+import { switchLanguage } from "./switchLanguage.js";
 
 export const RENDERPAGE = () => {
   const BODY = document.querySelector('body');
@@ -46,5 +47,6 @@ export const RENDERPAGE = () => {
   // BODYKEYBOARD.append(row);
   
   let collectionOfKeyboardButtons = getCollectionOfKeyboardRows();
+  switchLanguage();
 
 }
