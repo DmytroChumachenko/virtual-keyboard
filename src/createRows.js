@@ -15,14 +15,16 @@ export let createRows = (symbols, parentElement) => {
 
     for (const objectOfButton of row) {
       const objectOfButtonKeys = Object.keys(objectOfButton);
-
       const keyWord = objectOfButton.keyWord
       const ukr = objectOfButton.ukr;
       const eng = objectOfButton.eng;
 
       let keyDiv = CREATEEL({
         tag: 'div',
-        classes: ['keyboard--key', 'key', `${keyWord}`]
+        classes: ['keyboard--key', 'key', `${keyWord}`],
+        attributes: {
+              'data-attribute': `${keyWord}`
+            }
       });
       let spanUkr = CREATEEL({
         tag: 'span',
@@ -39,8 +41,8 @@ export let createRows = (symbols, parentElement) => {
       for (let i = 0; i < arrOfUkrKeys.length; i++) {
         let span = CREATEEL({
           tag: 'span',
-          classes: [arrOfUkrKeys[i], 'hidden'],
-          textContent: arrOfUkrValues[i]
+          textContent: arrOfUkrValues[i],
+          classes: [arrOfUkrKeys[i], 'hidden']
         })
         spanUkr.append(span);
       }
@@ -54,18 +56,16 @@ export let createRows = (symbols, parentElement) => {
             tag: 'span',
             textContent: arrOfEngValues[i],
             classes: arrOfEngKeys[i]
-          });
-         } else if(arrOfEngKeys[i] !== 'caseDown'){
-           span = CREATEEL({
+          })
+        } else {
+          span = CREATEEL({
             tag: 'span',
             textContent: arrOfEngValues[i],
-            classes: [arrOfEngKeys[i],'hidden']
-          });
-         }
-      
+            classes:[arrOfEngKeys[i], 'hidden']
+          })
+        }
         spanEng.append(span);
       }
-
       keyDiv.append(spanUkr,spanEng);
       rowDiv.append(keyDiv);
     }

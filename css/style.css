@@ -33,7 +33,6 @@
   border-radius: 5px;
 }
 
-
 .keyboard .row {
   clear: both;
   width: 100%;
@@ -68,7 +67,6 @@
 .hidden {
   display: none;
 }
-
 .keyboard .Backspace,
 .keyboard .CapsLock,
 .keyboard .ShiftLeft {
@@ -110,4 +108,7 @@
 
 .keyboard .Space {
   width: 330px;
+}
+.keyboard .active {
+  background: red;
 }
