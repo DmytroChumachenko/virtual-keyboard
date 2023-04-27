@@ -796,9 +796,9 @@ export const SYMBOLS = {
           shiftCaps: ',',
         },
         eng: {
-          caseDown: '//',
+          caseDown: '/',
           caseUp: '?',
-          caps: '//',
+          caps: '/',
           shiftCaps: '?',
         }
       },

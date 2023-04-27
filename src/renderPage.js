@@ -7,6 +7,7 @@ import {
 import {
   createRows
 } from "./createRows.js";
+import { getKeyboardButtons } from "./interactive.js";
 
 export const RENDERPAGE = () => {
   const BODY = document.querySelector('body');
@@ -44,4 +45,15 @@ export const RENDERPAGE = () => {
   let rows = createRows(SYMBOLS, BODYKEYBOARD)
   // BODYKEYBOARD.append(row);
 
+  let keyboardButtons = getKeyboardButtons();
+  let keyboardRows = Array.prototype.slice.call(keyboardButtons);
+console.log(keyboardRows);
+keyboardRows.forEach(row => {
+  console.log(row);
+});
+  console.log(keyboardButtons);
+
+  // for(let i = 0; i < keyboardButtons.length; i++) {
+  //   console.log(keyboardButtons[i]);
+  // }
 }
