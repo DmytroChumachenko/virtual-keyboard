@@ -35,7 +35,7 @@ export const RENDERPAGE = () => {
       spellcheck: 'false'
     }
   })
-
+ 
   const BODYKEYBOARD = CREATEEL({
     tag: 'div',
     classes: ['body--keyboard', 'keyboard'],
@@ -48,5 +48,5 @@ export const RENDERPAGE = () => {
   
   let collectionOfKeyboardButtons = getCollectionOfKeyboardRows();
   switchLanguage();
-
+  
 }

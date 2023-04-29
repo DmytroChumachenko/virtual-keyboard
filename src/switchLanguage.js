@@ -1,13 +1,16 @@
 export let switchLanguage = () => {
   const keyboardButtons = document.querySelectorAll('.keyboard--key');
+  let textarea = document.querySelector('.textarea');
   let isCtrlDown = false;
   let isAltDown = false;
   let isShiftDown = false;
   let isUkrLayout = false;
   let isCapsLockDown = false;
+  let keyCode;
 
 
   document.addEventListener("keydown", (event) => {
+    keyCode = event.code;
     if (event.code === 'ControlLeft') {
       isCtrlDown = true;
     }
@@ -33,6 +36,7 @@ export let switchLanguage = () => {
       toggleCapsLock();
       toCapsLock(isCapsLockDown);
     }
+   
   })
 
   document.addEventListener("keyup", (event) => {
@@ -51,6 +55,23 @@ export let switchLanguage = () => {
     }
 
   })
+
+
+  function toFillTextArea(keyCode, isUkrLayout) {
+    event.preventDefault();
+    textarea.focus();
+    keyboardButtons.forEach(button => {
+      if (button.getAttribute('data-attribute') === keyCode) {
+        if (isUkrLayout) {
+          if(isCapsLockDown) {
+          textarea.value +=  button.querySelector('.ukr').querySelector('.caps').innerText;
+          }
+        }
+      }
+
+    })
+
+  }
 
   function toggleCapsLock() {
     isCapsLockDown = !isCapsLockDown;

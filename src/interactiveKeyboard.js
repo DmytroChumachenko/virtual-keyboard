@@ -1,5 +1,7 @@
 export let getCollectionOfKeyboardRows = () => {
+ 
 
+ 
   // document.addEventListener("mouseover",)
   const collection = document.querySelectorAll('.keyboard--key');
   for (let div of collection) {
@@ -45,6 +47,7 @@ export let getCollectionOfKeyboardRows = () => {
   }
   
   document.addEventListener("keydown", (event) => {
+    
     if(event.code === 'CapsLock') {
       toggleCapsLock();
       changeCapsLock(isCapsLockDown)
