@@ -1,11 +1,15 @@
 export let switchLanguage = () => {
+  let isUkrLayout = localStorage.getItem('isUkrLayout');
+  
+  
   const keyboardButtons = document.querySelectorAll('.keyboard--key');
   const arrRestrict = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'Space', 'ShiftLeft', 'ShiftRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft'];
   let textarea = document.querySelector('.textarea');
   let isCtrlDown = false;
   let isAltDown = false;
   let isShiftDown = false;
-  let isUkrLayout = false;
+  // let isUkrLayout = false;
+  // const isUkrLayout = localStorage.getItem('isUkrLayout');
   let isCapsLockDown = false;
   let keyCode;
   let span;
@@ -108,6 +112,7 @@ export let switchLanguage = () => {
     }
     if (isAltDown && event.code === 'ControlLeft') {
       isUkrLayout = !isUkrLayout;
+      localStorage.setItem('isUkrLayout', isUkrLayout)
       updateKeyboardLayout(isUkrLayout, isCapsLockDown);
     }
 

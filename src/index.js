@@ -1,4 +1,4 @@
-import keyboardSymbols  from './symbols.js'
+
 
 const BODY = document.querySelector("body");
 let createEl = (tag, className, text, parentElement, action = 'append', attrName, attrValue) => {
@@ -26,7 +26,10 @@ let createEl = (tag, className, text, parentElement, action = 'append', attrName
 
 let textareaEl = createEl("textarea", ["body--textarea", "textarea"], null, BODY, "prepend");
 
-  document.addEventListener("DOMContentLoaded", textareaEl);
+  document.addEventListener("DOMContentLoaded",() => {
+    localStorage.setItem('isUkrLayout', false);
+    textareaEl
+  } );
   export {createEl}
 
 
