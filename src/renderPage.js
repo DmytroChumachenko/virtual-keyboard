@@ -43,10 +43,10 @@ export const RENDERPAGE = () => {
   })
   CENTRALIZER.append(TITLE, TEXTAREA, BODYKEYBOARD);
 
-  let rows = createRows(SYMBOLS, BODYKEYBOARD)
+  createRows(SYMBOLS, BODYKEYBOARD);
   // BODYKEYBOARD.append(row);
   
-  let collectionOfKeyboardButtons = getCollectionOfKeyboardRows();
+ getCollectionOfKeyboardRows();
   switchLanguage();
   
 }
