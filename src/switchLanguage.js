@@ -1,6 +1,6 @@
 export let switchLanguage = () => {
   const keyboardButtons = document.querySelectorAll('.keyboard--key');
-  const arrRestrict = ['Backspace', 'Tab', 'Del', 'CapsLock', 'Enter', 'Space', 'ShiftLeft', 'ShiftRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft'];
+  const arrRestrict = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'Space', 'ShiftLeft', 'ShiftRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft'];
   let textarea = document.querySelector('.textarea');
   let isCtrlDown = false;
   let isAltDown = false;
@@ -8,49 +8,86 @@ export let switchLanguage = () => {
   let isUkrLayout = false;
   let isCapsLockDown = false;
   let keyCode;
+  let span;
+  let spanLanguage;
+  let attr;
 
   document.addEventListener("click", (event) => {
-    let span = event.target;
-    let spanLanguage = span.parentElement;
-    let attr = spanLanguage.parentElement.getAttribute('data-attribute');
-    if(!isCapsLockDown && attr !== 'CapsLock'){
-      spanLanguage.parentElement.classList.remove('active');
-    }
-    if (span.parentElement.classList.contains('eng') || span.parentElement.classList.contains('ukr')) {
-      if (!arrRestrict.includes(attr)) {
-        textarea.value += span.innerText;
+    if (document.body.contains(event.target)) {
+      span = event.target;
+      spanLanguage = span.parentElement;
+      attr = spanLanguage.parentElement.getAttribute('data-attribute');
+      // if (attr === 'ArrowUp') {
+      //   const arrowUp = document.querySelector(`.${attr}`);
+      //   arrowUp.addEventListener('click', () => {
+      //     const event = new KeyboardEvent('keydown', {
+      //       key: 'ArrowUp',
+      //       code: 'ArrowUp',
+      //       which: 38,
+      //       keyCode: 38,
+      //       shiftKey: false,
+      //       ctrlKey: false,
+      //       altKey: false,
+      //       metaKey: false,
+      //     });
+      //     document.dispatchEvent(event);
+      //   });
+      // }
+      // if (attr === 'ArrowLeft') {
+      //   const arrowLeft = document.querySelector(`.${attr}`);
+      //   console.log(arrowLeft);
+      //   arrowLeft.addEventListener('click', () => {
+      //     const cursorPos = textarea.selectionStart;
+      //     textarea.setSelectionRange(cursorPos - 1, cursorPos - 1);
+      //   });
+      // }
+      if (attr === 'Backspace') {
+        backspace();
       }
-    }
-    if(attr === 'CapsLock'){
-      toggleCapsLock();
-      toCapsLock(isCapsLockDown);
+      if (isCapsLockDown && (attr === 'CapsLock')) {
+        spanLanguage.parentElement.classList.remove('active');
+      }
+      if (span.parentElement.classList.contains('eng') || span.parentElement.classList.contains('ukr')) {
+        if (!arrRestrict.includes(attr)) {
+          textarea.value += span.innerText;
+        }
+      }
+      if (attr === 'CapsLock') {
+        toggleCapsLock();
+        toCapsLock(isCapsLockDown);
+      }
+      if (attr !== 'CapsLock') {
+        spanLanguage.parentElement.classList.remove('active');
+      }
     }
   })
   document.addEventListener("mousedown", (event) => {
-    let span = event.target;
-    let spanLanguage = span.parentElement;
-    let attr = spanLanguage.parentElement.getAttribute('data-attribute');
-    spanLanguage.parentElement.classList.add('active');
-    
-    if (attr === 'ShiftLeft' || attr === 'ShiftRight') {
-      isShiftDown = true;
-      shiftCaps(isShiftDown);
+
+    if (document.body.contains(event.target)) {
+      span = event.target;
+      spanLanguage = span.parentElement;
+      spanLanguage.parentElement.classList.add('active');
+      attr = spanLanguage.parentElement.getAttribute('data-attribute');
+
+      if (attr === 'ShiftLeft' || attr === 'ShiftRight') {
+        isShiftDown = true;
+        shiftCaps(isShiftDown);
+      }
     }
   })
   document.addEventListener("mouseup", (event) => {
-    let span = event.target;
-    let spanLanguage = span.parentElement;
-    let attr = spanLanguage.parentElement.getAttribute('data-attribute');
-    if(attr !== 'CapsLock') {
-      spanLanguage.parentElement.classList.remove('active');
-    }
-    if (attr === 'ShiftLeft' || attr === 'ShiftRight') {
-      isShiftDown = false;
-      shiftCaps(isShiftDown);
-    }
-    if(isCapsLockDown){
-
-      toCapsLock(isCapsLockDown);
+    if (document.body.contains(event.target)) {
+      span = event.target;
+      spanLanguage = span.parentElement;
+      attr = spanLanguage.parentElement.getAttribute('data-attribute');
+      if (attr === 'ShiftLeft' || attr === 'ShiftRight') {
+        spanLanguage.parentElement.classList.remove('active');
+        isShiftDown = false;
+        shiftCaps(isShiftDown);
+      }
+      if (isCapsLockDown) {
+        toCapsLock(isCapsLockDown);
+      }
     }
   })
 
@@ -100,9 +137,30 @@ export let switchLanguage = () => {
       isShiftDown = false;
       shiftCaps(isShiftDown);
     }
+    if (isCapsLockDown) {
+      toCapsLock(isCapsLockDown);
+    }
 
   })
 
+  function backspace() {
+    textarea.focus();
+    const currentCursorPosition = textarea.selectionStart;
+    const textBeforeCursor = textarea.value.slice(0, currentCursorPosition - 1);
+    const textAfterCursor = textarea.value.slice(currentCursorPosition);
+
+    let str = textarea.value.toString().length;
+    if (currentCursorPosition === 0) {
+      return
+    } else if (currentCursorPosition !== str) {
+      textarea.value = textBeforeCursor + textAfterCursor;
+    } else if (currentCursorPosition === str) {
+      textarea.value = textBeforeCursor;
+    }
+
+    textarea.selectionStart = currentCursorPosition - 1;
+    textarea.selectionEnd = currentCursorPosition - 1;
+  }
 
 
   function toFillTextArea(event, keyCode, isUkrLayout) {

@@ -109,10 +109,11 @@
 .keyboard .Space {
   width: 330px;
 }
-.hover {
+
+.row .hover {
   background: green;
 }
-.keyboard.active {
-  background: red;
+.keyboard .active {
+  background-color: red;
   border-radius: 19px;
 }

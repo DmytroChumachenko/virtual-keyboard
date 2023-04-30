@@ -46,7 +46,7 @@ export const RENDERPAGE = () => {
   createRows(SYMBOLS, BODYKEYBOARD);
   // BODYKEYBOARD.append(row);
   
- getCollectionOfKeyboardRows();
   switchLanguage();
+  getCollectionOfKeyboardRows();
   
 }

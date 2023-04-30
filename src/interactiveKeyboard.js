@@ -1,15 +1,15 @@
 export let getCollectionOfKeyboardRows = () => {
   const collection = document.querySelectorAll('.keyboard--key');
-  for (let div of collection) {
-    div.addEventListener("mouseover", (event) => {
-      let target = event.target;
-        target.classList.add('hover');
-    });
-    div.addEventListener("mouseout", (event) => {
-      let target = event.target;
-        target.classList.remove('hover');
-    });
-  }
+
+  collection.forEach(button => {
+    button.addEventListener("mouseover", () => {
+      button.classList.add('hover');
+    })
+    button.addEventListener("mouseout", () => {
+      button.classList.remove('hover');
+    })
+  })
+
 
   let arrOfCode = [];
 
@@ -20,6 +20,7 @@ export let getCollectionOfKeyboardRows = () => {
 
   let arr = Array.from(collection);
   let isCapsLockDown = false;
+
   function toggleCapsLock() {
     isCapsLockDown = !isCapsLockDown;
   }
@@ -58,6 +59,7 @@ export let getCollectionOfKeyboardRows = () => {
         });
       })
     }
+
   })
-  
+
 };
