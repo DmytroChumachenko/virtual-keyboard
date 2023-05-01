@@ -3,7 +3,9 @@ export let switchLanguage = () => {
   
   
   const keyboardButtons = document.querySelectorAll('.keyboard--key');
-  const arrRestrict = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 'Space', 'ShiftLeft', 'ShiftRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft'];
+  const arrRestrict = ['Backspace', 'Tab', 'Delete', 'CapsLock', 'Enter', 
+  'Space', 'ShiftLeft', 'ShiftRight', 
+  'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft'];
   let textarea = document.querySelector('.textarea');
   let isCtrlDown = false;
   let isAltDown = false;
@@ -21,30 +23,6 @@ export let switchLanguage = () => {
       span = event.target;
       spanLanguage = span.parentElement;
       attr = spanLanguage.parentElement.getAttribute('data-attribute');
-      // if (attr === 'ArrowUp') {
-      //   const arrowUp = document.querySelector(`.${attr}`);
-      //   arrowUp.addEventListener('click', () => {
-      //     const event = new KeyboardEvent('keydown', {
-      //       key: 'ArrowUp',
-      //       code: 'ArrowUp',
-      //       which: 38,
-      //       keyCode: 38,
-      //       shiftKey: false,
-      //       ctrlKey: false,
-      //       altKey: false,
-      //       metaKey: false,
-      //     });
-      //     document.dispatchEvent(event);
-      //   });
-      // }
-      // if (attr === 'ArrowLeft') {
-      //   const arrowLeft = document.querySelector(`.${attr}`);
-      //   console.log(arrowLeft);
-      //   arrowLeft.addEventListener('click', () => {
-      //     const cursorPos = textarea.selectionStart;
-      //     textarea.setSelectionRange(cursorPos - 1, cursorPos - 1);
-      //   });
-      // }
       if (attr === 'Backspace') {
         backspace();
       }
@@ -95,7 +73,6 @@ export let switchLanguage = () => {
     }
   })
 
-
   document.addEventListener("keydown", (event) => {
 
     keyCode = event.code;
@@ -112,7 +89,7 @@ export let switchLanguage = () => {
     }
     if (isAltDown && event.code === 'ControlLeft') {
       isUkrLayout = !isUkrLayout;
-      localStorage.setItem('isUkrLayout', isUkrLayout)
+      localStorage.setItem('isUkrLayout', isUkrLayout);
       updateKeyboardLayout(isUkrLayout, isCapsLockDown);
     }
 

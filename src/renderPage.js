@@ -42,10 +42,20 @@ export const RENDERPAGE = () => {
     id: 'keyboard'
   })
   CENTRALIZER.append(TITLE, TEXTAREA, BODYKEYBOARD);
+  const PAROC = CREATEEL({
+    tag: 'p',
+    classes: 'description',
+    textContent: 'Keyboard was made on OC Windows'
+  })
+  const PARLANG = CREATEEL({
+    tag: 'p',
+    classes: 'language',
+    textContent: 'For change language use combination: CtrlLeft + Alt'
+  })
 
   createRows(SYMBOLS, BODYKEYBOARD);
   // BODYKEYBOARD.append(row);
-  
+  CENTRALIZER.append(PAROC, PARLANG);
   switchLanguage();
   getCollectionOfKeyboardRows();
   
